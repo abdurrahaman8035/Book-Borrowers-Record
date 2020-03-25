@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<hr>
+<div class="card">
+    <h5 class="card-header">Book information</h5>
+    <div class="card-body">
+        <!-- <h5 class="card-title">Student information</h5> -->
+        <li>Title : {{ book.title }}</li>
+        <li>Borrowed_by : {{ book.borrowed_by }}</li>
+        <li>Issued_date : {{ book.issued_date }}</li>
+        <li>Returning_date : {{ book.returning_date }}</li>
+        <br>
+        <a href="#" class="btn btn-primary">Delete Book</a>
+        <a href="{% url 'RenewBook' book.pk %}" class="btn btn-primary">Renew Book</a>
+
+    </div>
+</div>
+<br>
+
+{% endblock content %}

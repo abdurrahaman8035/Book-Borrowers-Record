@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<form action="{% url 'RenewBook' %}" method="post">
+    {{ form.as_p }}
+</form>
+
+{% endblock content %}
