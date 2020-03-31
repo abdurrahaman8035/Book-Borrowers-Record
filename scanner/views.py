@@ -9,7 +9,24 @@ from .forms import *
 
 # Create your views here.
 
-# charges = Edit_Overdue_Charges.overdue
+def new_book(request, student_id):
+    """"Add a new book for a particular student."""
+    student = Student.objects.get(id=student_id)
+    if request.method != 'POST':
+        # No data submitted; create a blank form.
+        form = BookForm()
+    else:
+        # POST data submitted; process data.
+        form = BookForm(data=request.POST)
+        if form.is_valid():
+            book = form.save(commit=False)
+            book.borrowed_by = student
+            book.save()
+            book.get_absolute_url()
+            return redirect('scanner:profile', student_id=student_id)
+    # Display a blank or invalid form.
+    context = {'student': student, 'form': form}
+    return render(request, 'scanner\\addBook.html', context)
 
 def HomeView(request):
     total_books = Book.objects.count()
@@ -44,21 +61,16 @@ class AllStudentsView(ListView):
    template_name = 'scanner\\students_list.html'
    context_object_name = 'students'
 
-def new_book(request, student_id):
-    """"Add a new book for a particular student."""
-    student = Student.objects.get(id=student_id)
-    if request.method != 'POST':
-        # No data submitted; create a blank form.
-        form = BookForm()
-    else:
-        # POST data submitted; process data.
-        form = BookForm(data=request.POST)
-        if form.is_valid():
-            book = form.save(commit=False)
-            book.borrowed_by = student
-            book.save()
-            book.get_absolute_url()
-            return redirect('scanner:profile', student_id=student_id)
-    # Display a blank or invalid form.
-    context = {'student': student, 'form': form}
-    return render(request, 'scanner\\addBook.html', context)
+# class Add_Book_View(CreateView):
+#     model = Book
+#     template_name = 'scanner\\addBook.html'
+#     fields = ['title']
+#     pk_url_kwarg = 'student_id'
+#     context_object_name = 'student'
+#     success_url = reverse_lazy('scanner:profile', args=[pk_url_kwarg])
+#     queryset = Student.objects.get(id=pk_url_kwarg)
+#
+#     def form_valid(self, form):
+#         self.object.borrowed_by = self.queryset
+#         self.student.save()
+#

@@ -3,7 +3,6 @@ from django.db import models
 from django.urls import reverse, reverse_lazy
 from datetime import *
 
-
 # Create your models here.
 
 class Edit_Overdue_Charges(models.Model):
@@ -48,7 +47,7 @@ class Student(models.Model):
 
 
     def get_absolute_url(self):
-        return reverse('scanner:profile', args=[self.pk])
+        return reverse('scanner:profile', kwargs={'student_id': self.pk })
 
     def save(self):
         # self.calcReturnDate()
@@ -64,7 +63,7 @@ class Book(models.Model):
 
     title = models.CharField(max_length=100)
     ret_date = models.CharField(max_length=200, null=True, blank=True)
-    borrowed_by = models.ForeignKey(Student, on_delete=models.CASCADE)
+    borrowed_by = models.ForeignKey(Student, on_delete=models.CASCADE, null=True, blank=True)
     issued_date = models.DateTimeField(auto_now_add=True)
     added_days = models.IntegerField(blank=True, null=True)
     rem_days = models.CharField(max_length=100, null=True, blank=True)
@@ -78,7 +77,7 @@ class Book(models.Model):
         return dateOfReturn
 
     def get_absolute_url(self):
-        return reverse('scanner:profile', args=[int(self.borrowed_by.pk)])
+        return reverse('scanner:profile', kwargs={'student_id': self.borrowed_by.pk })
 
     def __str__(self):
         return self.title[:50]
