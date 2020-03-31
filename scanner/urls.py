@@ -1,10 +1,12 @@
 from django.urls import path
-from django.views.generic import TemplateView
-from .views import HomeView
+from scanner.views import HomeView, AllStudentsView, new_book, StudentDetailView
+
+
+app_name = 'scanner'
 
 urlpatterns = [
-    path('', HomeView.as_view(), name = 'home'),
-    # path('students_list/', Success.as_view(), name = 'students_list'),
-    # path('BookAdd/', BookView.as_view(), name = 'BookAdd'),
-    # path('BookList/', BookListView.as_view(), name = 'BookList'),
+    path('students/<int:student_id>/', StudentDetailView, name='profile'),
+    path('students/<int:student_id>/book', new_book, name='newbook'),
+    path('students/', AllStudentsView.as_view(), name='allstudents'),
+    path('', HomeView, name='home'),
 ]
