@@ -63,7 +63,7 @@ class Book(models.Model):
 
     title = models.CharField(max_length=100)
     ret_date = models.CharField(max_length=200, null=True, blank=True)
-    borrowed_by = models.ForeignKey(Student, on_delete=models.CASCADE, null=True, blank=True)
+    borrowed_by = models.ForeignKey(Student, on_delete=models.CASCADE, null=True, blank=True, related_name='books')
     issued_date = models.DateTimeField(auto_now_add=True)
     added_days = models.IntegerField(blank=True, null=True)
     rem_days = models.CharField(max_length=100, null=True, blank=True)

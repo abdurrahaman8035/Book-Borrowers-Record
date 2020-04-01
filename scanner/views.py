@@ -1,5 +1,6 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, reverse
-from django.views.generic import TemplateView, CreateView, ListView, DetailView
+from django.views.generic import TemplateView, CreateView, ListView, DetailView, DeleteView
 from .models import Book, Student
 from datetime import *
 import time
@@ -22,7 +23,6 @@ def new_book(request, student_id):
             book = form.save(commit=False)
             book.borrowed_by = student
             book.save()
-            book.get_absolute_url()
             return redirect('scanner:profile', student_id=student_id)
     # Display a blank or invalid form.
     context = {'student': student, 'form': form}
@@ -37,8 +37,8 @@ def HomeView(request):
 def StudentDetailView(request, student_id):
    """Show a single student and all books borrowed by students."""
    student = Student.objects.get(id=student_id)
-   #get all books
-   all_books = Book.objects.all()
+   #get all books borrowed by this student
+   all_books = student.books.all()
 
    for book in all_books:
       # calculate their remaining days left to expire
@@ -51,7 +51,7 @@ def StudentDetailView(request, student_id):
       result = str(days_left.days) + ' days remaining'
       book.rem_days = result
       book.save()
-   books = student.book_set.all()
+   books = all_books
    context = {'books': books, 'student': student}
    return render(request, 'scanner\\user_profile.html', context)
 
@@ -61,16 +61,11 @@ class AllStudentsView(ListView):
    template_name = 'scanner\\students_list.html'
    context_object_name = 'students'
 
-# class Add_Book_View(CreateView):
-#     model = Book
-#     template_name = 'scanner\\addBook.html'
-#     fields = ['title']
-#     pk_url_kwarg = 'student_id'
-#     context_object_name = 'student'
-#     success_url = reverse_lazy('scanner:profile', args=[pk_url_kwarg])
-#     queryset = Student.objects.get(id=pk_url_kwarg)
-#
-#     def form_valid(self, form):
-#         self.object.borrowed_by = self.queryset
-#         self.student.save()
-#
+class StudentDelete(DeleteView):
+    model = Book
+    template_name = 'scanner\\deletebook.html'
+    #get the student id from the url
+
+    def get_success_url(self):
+        student = self.object.borrowed_by.pk
+        return reverse_lazy('scanner:profile', kwargs={'student_id': student})
