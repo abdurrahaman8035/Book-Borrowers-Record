@@ -38,9 +38,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-     # 'test_app',
     'bootstrap4',
     'scanner',
+    'django_tables2',
+    
+    'django.contrib.sites', # < here
+    'allauth', # < here
+    'allauth.account', # < here
+    'allauth.socialaccount', # < here
+    'widget_tweaks', # < here
 ]
 
 MIDDLEWARE = [
@@ -58,7 +64,7 @@ ROOT_URLCONF = 'book_borrowers_record.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), os.path.join(BASE_DIR, 'templates', 'allauth')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -125,3 +131,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
+DJANGO_TABLES2_TEMPLATE = 'django_tables2/bootstrap4.html'
+
+SITE_ID = 1 # < here
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # < here
+LOGIN_REDIRECT_URL = 'scanner:home' # < here

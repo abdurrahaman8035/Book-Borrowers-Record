@@ -7,6 +7,7 @@ import time
 # from .models import Edit_Overdue_Charges
 from django.urls import reverse_lazy
 from .forms import *
+import django_tables2 as tables
 
 # Create your views here.
 
@@ -56,16 +57,30 @@ def StudentDetailView(request, student_id):
    return render(request, 'scanner\\user_profile.html', context)
 
 
-class AllStudentsView(ListView):
-   model = Student
-   template_name = 'scanner\\students_list.html'
-   context_object_name = 'students'
+class SimpleTable(tables.Table):
+    special = tables.URLColumn()
+    class Meta:
+        model = Student
+        fields = ('first_name', 'second_name', 'id_number', 'phone_number', 'registration_date','Email')
+
+
+    # next = tables.LinkColumn('scanner:profile', kwargs={'student_id': object.pk})
+
+
+class AllStudentsView(tables.SingleTableView, ListView):
+    table_class = SimpleTable
+    queryset = Student.objects.all()
+    model = Student
+    template_name = 'scanner\\students_list.html'
+    context_object_name = 'students'
+    total_students = Student.objects.count()
+    extra_context = {'total_students': total_students}
 
 class StudentDelete(DeleteView):
     model = Book
     template_name = 'scanner\\deletebook.html'
-    #get the student id from the url
 
+    #get the student id from the url
     def get_success_url(self):
         student = self.object.borrowed_by.pk
         return reverse_lazy('scanner:profile', kwargs={'student_id': student})

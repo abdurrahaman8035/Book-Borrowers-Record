@@ -29,7 +29,7 @@ CHOICES = [
 
 class Student(models.Model):
     class Meta:
-        ordering = ['-registered_date']
+        ordering = ['registration_date']
         verbose_name_plural = 'students'
 
     first_name = models.CharField(max_length=100)
@@ -37,7 +37,7 @@ class Student(models.Model):
     id_number = models.CharField(max_length=15, unique=True)
     Email = models.EmailField()
     phone_number = models.CharField(max_length=11, unique=True)
-    registered_date = models.DateTimeField(auto_now_add=True)
+    registration_date = models.DateTimeField(auto_now_add=True)
     year_of_admission = models.ForeignKey(Year_Of_Reg, on_delete=models.CASCADE)
     image_url = models.CharField(max_length=100)
     level = models.CharField(
@@ -81,3 +81,5 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title[:50]
+
+
