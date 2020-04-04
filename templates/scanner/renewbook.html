@@ -1,0 +1,21 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h1>Renew loan period</h1>
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+<!--<p>Are you sure you want to delete the book "{{ book.title }}"?</p>-->
+<button class="btn btn-success btn-icon-split" type="submit">
+                                <span class="icon text-white-50">
+                                  <i class="fas fa-check-circle"></i>
+                                </span>
+                                <span class="text">Confirm</span>
+                              </button>
+
+</form>
+
+{% endblock content %}

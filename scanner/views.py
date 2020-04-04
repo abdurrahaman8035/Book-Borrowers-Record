@@ -1,15 +1,15 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect, reverse
-from django.views.generic import TemplateView, CreateView, ListView, DetailView, DeleteView
+from django.shortcuts import render, redirect
+from django.views.generic import ListView,  DeleteView, UpdateView
 from .models import Book, Student
 from datetime import *
-import time
 # from .models import Edit_Overdue_Charges
 from django.urls import reverse_lazy
 from .forms import *
 import django_tables2 as tables
 
 # Create your views here.
+
+ADDED_DAYS = 4
 
 def new_book(request, student_id):
     """"Add a new book for a particular student."""
@@ -43,11 +43,14 @@ def StudentDetailView(request, student_id):
 
    for book in all_books:
       # calculate their remaining days left to expire
-      current_date = date.today()
       b = datetime.date(book.issued_date)
-      days_left = (date(b.year, b.month, b.day) + timedelta(days=14)) - date.today()
+      # a = datetime.date(book.added_days)
 
-      returning_date = date(b.year, b.month, b.day) + timedelta(days=14)
+      # addedDays = (date(a.year, a.month, a.day))
+      #calculate the days left for book to expire
+      days_left = (date(b.year, b.month, b.day) + timedelta(days=14)) - date.today()
+      returning_date = (date(b.year, b.month, b.day) + timedelta(days=14))
+
       book.ret_date = returning_date
       result = str(days_left.days) + ' days remaining'
       book.rem_days = result
@@ -64,9 +67,6 @@ class SimpleTable(tables.Table):
         fields = ('first_name', 'second_name', 'id_number', 'phone_number', 'registration_date','Email')
 
 
-    # next = tables.LinkColumn('scanner:profile', kwargs={'student_id': object.pk})
-
-
 class AllStudentsView(tables.SingleTableView, ListView):
     table_class = SimpleTable
     queryset = Student.objects.all()
@@ -81,6 +81,16 @@ class StudentDelete(DeleteView):
     template_name = 'scanner\\deletebook.html'
 
     #get the student id from the url
+    def get_success_url(self):
+        student = self.object.borrowed_by.pk
+        return reverse_lazy('scanner:profile', kwargs={'student_id': student})
+
+class RenewBookView(UpdateView):
+    model = Book
+    fields = ['added_days']
+    template_name = 'scanner\\renewbook.html'
+
+    # get the student id from the url
     def get_success_url(self):
         student = self.object.borrowed_by.pk
         return reverse_lazy('scanner:profile', kwargs={'student_id': student})

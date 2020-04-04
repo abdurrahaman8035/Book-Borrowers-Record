@@ -65,21 +65,11 @@ class Book(models.Model):
     ret_date = models.CharField(max_length=200, null=True, blank=True)
     borrowed_by = models.ForeignKey(Student, on_delete=models.CASCADE, null=True, blank=True, related_name='books')
     issued_date = models.DateTimeField(auto_now_add=True)
-    added_days = models.IntegerField(blank=True, null=True)
+    added_days = models.DateField(null=True, blank=True, editable=True)
     rem_days = models.CharField(max_length=100, null=True, blank=True)
-
-    def calcReturnDate(self):
-        # date and time functions to calculate returning date
-        current_date = date.today()
-        t1 = timedelta(days=14)
-        dateOfReturn = current_date + t1
-        self.returning_date = dateOfReturn
-        return dateOfReturn
 
     def get_absolute_url(self):
         return reverse('scanner:profile', kwargs={'student_id': self.borrowed_by.pk })
 
     def __str__(self):
         return self.title[:50]
-
-
