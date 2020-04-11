@@ -41,12 +41,12 @@ INSTALLED_APPS = [
     'bootstrap4',
     'scanner',
     'django_tables2',
+    'crispy_forms',
     
     'django.contrib.sites', # < here
     'allauth', # < here
     'allauth.account', # < here
     'allauth.socialaccount', # < here
-    'widget_tweaks', # < here
 ]
 
 MIDDLEWARE = [
@@ -72,6 +72,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -132,8 +133,19 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 DJANGO_TABLES2_TEMPLATE = 'django_tables2/bootstrap4.html'
 
 SITE_ID = 1 # < here
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # < here
 LOGIN_REDIRECT_URL = 'scanner:home' # < here
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+LOGIN_REDIRECT_URL = 'scanner:home'
+LOGOUT_REDIRECT_URL = 'scanner:home'

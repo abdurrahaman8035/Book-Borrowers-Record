@@ -185,13 +185,13 @@ templates/base.html
 templates/base/
 templates/scanner/404.html
 templates/scanner/addBook.html
-templates/scanner/blank.html
+templates/scanner/search_result.html
 templates/scanner/buttons.html
 templates/scanner/cards.html
 templates/scanner/charts.html
 templates/scanner/forgot-password.html
 templates/scanner/index.html
-templates/scanner/login.html
+templates/registration/login.html
 templates/scanner/register.html
 templates/scanner/students_list.html
 templates/scanner/tables.html
