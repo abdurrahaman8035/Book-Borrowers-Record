@@ -178,27 +178,4 @@ scanner/migrations/__pycache__/0015_auto_20200328_0735.cpython-37.pyc
 scanner/migrations/__pycache__/0015_auto_20200328_2036.cpython-37.pyc
 scanner/migrations/__pycache__/0016_auto_20200328_2037.cpython-37.pyc
 scanner/migrations/__pycache__/0016_remove_book_remaining_days.cpython-37.pyc
-static/img/abdurrahaman.jpg
-static/img/ysu.jpg
-static/img/ysu2.jpg
-templates/base.html
-templates/base/
-templates/scanner/404.html
-templates/scanner/addBook.html
-templates/scanner/search_result.html
-templates/scanner/buttons.html
-templates/scanner/cards.html
-templates/scanner/charts.html
-templates/scanner/forgot-password.html
-templates/scanner/index.html
-templates/registration/login.html
-templates/scanner/register.html
-templates/scanner/students_list.html
-templates/scanner/tables.html
-templates/scanner/user_profile.html
-templates/scanner/utilities-animation.html
-templates/scanner/utilities-border.html
-templates/scanner/utilities-color.html
-templates/scanner/utilities-other.html
-templates/test app/
 venv/Include/
