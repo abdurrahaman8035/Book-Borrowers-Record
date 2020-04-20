@@ -42,6 +42,11 @@ INSTALLED_APPS = [
     'scanner',
     'django_tables2',
     'crispy_forms',
+    
+    'django.contrib.sites', # < here
+    'allauth', # < here
+    'allauth.account', # < here
+    'allauth.socialaccount', # < here
 ]
 
 MIDDLEWARE = [
@@ -59,8 +64,7 @@ ROOT_URLCONF = 'book_borrowers_record.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates'),
-                 os.path.join(BASE_DIR, 'templates', 'allauth')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), os.path.join(BASE_DIR, 'templates', 'allauth')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -134,8 +138,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DJANGO_TABLES2_TEMPLATE = 'django_tables2/bootstrap4.html'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # < here
-LOGIN_REDIRECT_URL = 'scanner:home'  # < here
+SITE_ID = 1 # < here
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # < here
+LOGIN_REDIRECT_URL = 'scanner:home' # < here
 
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
