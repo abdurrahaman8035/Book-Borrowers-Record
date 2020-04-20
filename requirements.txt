@@ -3,12 +3,11 @@ certifi==2019.11.28
 chardet==3.0.4
 defusedxml==0.6.0
 Django==2.2
-django-allauth==0.41.0
 django-bootstrap-admin==0.3.4
 django-bootstrap-modal-forms==1.5.0
 django-bootstrap4==1.1.1
+django-crispy-forms==1.9.0
 django-tables2==2.3.0
-django-widget-tweaks==1.4.5
 idna==2.9
 isbnlib==3.10.0
 isbntools==4.3.22

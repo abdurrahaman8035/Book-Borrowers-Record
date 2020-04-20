@@ -6,15 +6,15 @@
 <!--check if there is a student return by the search query-->
 
 {% if object_list %}
-<p>Search results...</p>
+<p>Search results...({{ total_result }})</p>
 
 
 <table class="table table-hover">
   <thead class="">
     <tr>
       <!--      <th scope="col">#</th>-->
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
       <th scope="col">Email</th>
       <th scope="col">Profile page</th>
     </tr>

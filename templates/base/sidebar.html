@@ -40,7 +40,7 @@
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Registration:</h6>
           <a class="collapse-item" href="{% url 'scanner:register_student' %}">Register a Student</a>
-          <a class="collapse-item" href="#">Register a Staff</a>
+          <a class="collapse-item" href="{% url 'scanner:register_staff' %}">Register a Staff</a>
         </div>
       </div>
     </li>
@@ -57,7 +57,7 @@
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
-      <a class="nav-link" href="#">
+      <a class="nav-link" href="{% url 'scanner:all_staff' %}">
         <i class="fas fa-user"></i>
         <span>All staffs</span></a>
     </li>
