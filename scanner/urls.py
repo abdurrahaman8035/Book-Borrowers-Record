@@ -3,15 +3,9 @@ from scanner.views import (HomeView,
                            AllStudentsView,
                            new_student_book,
                            StudentDetailView,
-<<<<<<< HEAD
                            StudentBookDelete,
                            RenewStudentBookView,
                            UserSearch,
-=======
-                           StudentDelete,
-                           RenewBookView,
-                           Search_result,
->>>>>>> parent of 4e5a06c... Added styles to templates
                            Register_student,
                            StudentEditProfile,
                            ExpiredBooksView,
@@ -33,10 +27,9 @@ urlpatterns = [
     path('all_books/', AllBooksView.as_view(), name='all_books'),
     path('expired_books/', ExpiredBooksView.as_view(), name='expired_books'),
     path('register/', Register_student.as_view(), name='register_student'),
-    path('search/', Search_result.as_view(), name='search'),
+    path('search/', UserSearch.as_view(), name='search_student'),
     path('students/', AllStudentsView.as_view(), name='allstudents'),
     path('students/<int:student_id>/', StudentDetailView, name='profile'),
-<<<<<<< HEAD
     path('book/<int:student_id>/', new_student_book, name='book-new'),
     path('students/<int:student_id>/<int:pk>/delete',
          StudentBookDelete.as_view(), name='deletebook'),
@@ -55,10 +48,4 @@ urlpatterns = [
          RenewStaffBookView.as_view(), name='renew_staff_book'),
     path('staff/<int:pk>/edit', StaffEditProfile.as_view(),
          name='edit_staff_profile'),
-=======
-    path('book/<int:student_id>/', new_book, name='book-new'),
-    path('students/<int:student_id>/<int:pk>/delete', StudentDelete.as_view(), name='deletebook'),
-    path('students/<int:student_id>/<int:pk>/renew', RenewBookView.as_view(), name='renew-book'),
-    path('students/<int:pk>/edit', StudentEditProfile.as_view(), name='edit_student_profile'),
->>>>>>> parent of 4e5a06c... Added styles to templates
 ]
