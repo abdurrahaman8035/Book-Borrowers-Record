@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from datetime import *
+from django.core.mail import send_mail
 
 
 class Year_Of_Reg(models.Model):
@@ -43,6 +44,12 @@ class Student(models.Model):
         max_length=5,
         choices=CHOICES,
     )
+
+    def Notify(self):
+        Message = f'Dear {self.first_name} {self.second_name},\n Thanks for registering with the Library.\n Note: Attached below is our rules and regulations for you to read.\n Thanks!'
+        return Message
+        # send_mail(subject='Welcome to YSU Library', message=Message,
+        #           from_email='YSU-Library_Team@gmail.com')
 
     def get_absolute_url(self):
         return reverse('scanner:profile', kwargs={'student_id': self.pk})
@@ -118,12 +125,14 @@ class Staff_Book(models.Model):
     def __str__(self):
         return self.title[:50]
 
-class Edit_Overdue_Charges(models.Model):
-    overdue = models.IntegerField()
 
-    class Meta:
-        verbose_name_plural = 'overdue charges'
+# class Edit_Overdue_Charges(models.Model):
+#     overdue = models.IntegerField()
 
-    def __str__(self):
-        value = self.overdue
-        return 'The current overdue charges is ', value, ' naira per day'
+#     class Meta:
+#         verbose_name_plural = 'overdue charges'
+
+#     def __str__(self):
+#         value = self.overdue
+#         return 'The current overdue charges is ' +\
+        # str(value) + ' naira per day'
