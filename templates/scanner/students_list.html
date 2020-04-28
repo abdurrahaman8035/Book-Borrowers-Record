@@ -12,6 +12,8 @@
         </a>
 </div>
 <br>
+{% if students %}
+
 <p>List of all registered students</p>
 <table class="table table-hover">
   <thead class="">
@@ -43,4 +45,10 @@
   </tbody>
 
 </table>
+{% else %}
+<p class="ml-4"><span><a href="#" class="btn btn-warning btn-circle btn-sm mr-2">
+  <i class="fas fa-exclamation-triangle"></i>
+</a></span>Sorry, there are no students registered, click  <a href="{% url 'scanner:register_student' %}">here</a> to register a new student</p>
+
+{% endif %}
 {% endblock content %}
