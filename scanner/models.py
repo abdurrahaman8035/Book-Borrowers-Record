@@ -30,7 +30,7 @@ class Student(models.Model):
         verbose_name_plural = 'students'
 
     image = models.ImageField(
-        upload_to='images/', null=True)
+        upload_to='images//%Y/%m/%d/', null=True)
     first_name = models.CharField(max_length=100)
     second_name = models.CharField(max_length=100)
     id_number = models.CharField(max_length=15, unique=True)
@@ -65,7 +65,7 @@ class Staff(models.Model):
         ordering = ['-registration_date']
         verbose_name_plural = 'staffs'
     image = models.ImageField(
-        upload_to='images/', default='images/user-circle.svg')
+        upload_to='images//%Y/%m/%d/', default='images/user-circle.svg')
     first_name = models.CharField(max_length=100)
     second_name = models.CharField(max_length=100)
     staff_id = models.CharField(max_length=15, unique=True)
