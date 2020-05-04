@@ -33,7 +33,7 @@
     {% for book in books %}
 
     <tr>
-      <td>{{ book.title | title }}</td>
+      <td>{{ book.title | title |truncatewords:4 }}</td>
       <td>{{ book.borrowed_by.first_name | title }} {{ book.borrowed_by.second_name | title }}</td>
       <td class="text-danger">{{ book.expiring_date |timesince }} ago</td>
       <td><a href="{% url 'scanner:profile' book.borrowed_by.id %}" class="btn btn-success btn-icon-split">

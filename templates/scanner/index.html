@@ -17,7 +17,9 @@
       <div class="card-body">
         <div class="row no-gutters align-items-center">
           <div class="col mr-2">
-            <a href="{% url 'scanner:allstudents' %}"><div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total students registered</div></a>
+            <a href="{% url 'scanner:allstudents' %}">
+              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total students registered</div>
+            </a>
             <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_students }}</div>
           </div>
           <div class="col-auto">
@@ -34,7 +36,9 @@
       <div class="card-body">
         <div class="row no-gutters align-items-center">
           <div class="col mr-2">
-             <a href="{% url 'scanner:all_staff' %}"><div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total staff registered</div></a>
+            <a href="{% url 'scanner:all_staff' %}">
+              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total staff registered</div>
+            </a>
             <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_staff }}</div>
           </div>
           <div class="col-auto">
@@ -51,7 +55,9 @@
       <div class="card-body">
         <div class="row no-gutters align-items-center">
           <div class="col mr-2">
-            <a href="{% url 'scanner:all_books' %}"><div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Books borrowed</div></a>
+            <a href="{% url 'scanner:all_books' %}">
+              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Books borrowed</div>
+            </a>
             <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_books }}</div>
           </div>
           <div class="col-auto">
@@ -67,7 +73,9 @@
       <div class="card-body">
         <div class="row no-gutters align-items-center">
           <div class="col mr-2">
-            <a href="{% url 'scanner:expired_books' %}"><div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Expired Books</div></a>
+            <a href="{% url 'scanner:expired_books' %}">
+              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Expired Books</div>
+            </a>
             <div class="h5 mb-0 font-weight-bold text-gray-800">{{ expired_books }}</div>
           </div>
           <div class="col-auto">
@@ -150,17 +158,17 @@
 </div>
 
 <!-- Content Row -->
-<div class="row">
+<!-- <div class="row"> -->
 
   <!-- Content Column -->
-  <div class="col-lg-6 mb-4">
-<h2>Column 1 section</h2>
-    
+  <!-- <div class="col-lg-6 mb-4">
+    <h2>Column 1 section</h2>
 
-  </div>
 
-  <div class="col-lg-6 mb-4">
-<h2>Column 2 section</h2>
-  </div>
-</div>
+  </div> -->
+
+  <!-- <div class="col-lg-6 mb-4">
+    <h2>Column 2 section</h2>
+  </div> -->
+<!-- </div> -->
 {% endblock content %}

@@ -31,7 +31,7 @@
     {% if staff_books %}
     {% for staff_book in staff_books %}
     <tr>
-      <td>{{ staff_book.title | title }}</td>
+      <td>{{ staff_book.title | title |truncatewords:6 }}</td>
       <td>{{ staff_book.borrowed_by.first_name | title }} {{ staff_book.borrowed_by.second_name | title }} <span class="text-success">(staff)</span></td>
       <td><a href="{% url "scanner:staffprofile" staff_book.borrowed_by.pk %}" class="btn btn-success btn-icon-split">
           <span class="icon text-white-50">
@@ -46,7 +46,7 @@
     {% for book in books %}
 
     <tr>
-      <td>{{ book.title | title }}</td>
+      <td>{{ book.title | title |truncatewords:6 }}</td>
       <td>{{ book.borrowed_by.first_name | title }} {{ book.borrowed_by.second_name | title }}</td>
       <td><a href="{% url 'scanner:profile' book.borrowed_by.id %}" class="btn btn-success btn-icon-split">
           <span class="icon text-white-50">
