@@ -1,8 +1,9 @@
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.db import models
 from django.urls import reverse
 from datetime import *
-from django.core.mail import send_mail
-
+from django.core.mail import EmailMessage
 
 class Year_Of_Reg(models.Model):
     year = models.CharField(max_length=9)
@@ -44,6 +45,7 @@ class Student(models.Model):
         max_length=5,
         choices=CHOICES,
     )
+    email_sent = models.BooleanField(null=True, blank=True, default=None)
 
     def Notify(self):
         Message = f'Dear {self.first_name} {self.second_name},\n Thanks for registering with the Library.\n Note: Attached below is our rules and regulations for you to read.\n Thanks!'
@@ -56,6 +58,9 @@ class Student(models.Model):
 
     def __str__(self):
         return self.first_name.title() + ' ' + self.second_name.title()
+
+class List_Of_Emails(models.Model):
+    email = models.EmailField(null=True, blank=True)
 
 
 class Staff(models.Model):
@@ -124,6 +129,24 @@ class Staff_Book(models.Model):
 
     def __str__(self):
         return self.title[:50]
+
+
+@receiver(post_save, sender=Student, dispatch_uid="send_email_to_student")
+def send_email_to_student(sender, **kwargs):
+    student = kwargs['instance']
+    student_name = str(student.first_name) + ' ' + str(student.second_name)
+    student_email = student.Email
+    message = 'Hello {}, thanks for registering with us! Attached is our rules and regulations for you to read! thanks'.format(student_name)
+    if student.email_sent is None:
+        email = EmailMessage('Welcome Email from YSU YSU-Library_Team',
+                        message, [student_email])
+        email.attach_file('static/files/rules_and_regulations.pdf')
+        email.send(fail_silently=False)
+        student.email_sent = True
+        print('sending email...')
+        print(message)
+        student.save()
+
 
 
 # class Edit_Overdue_Charges(models.Model):

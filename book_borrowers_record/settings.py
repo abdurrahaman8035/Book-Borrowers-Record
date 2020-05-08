@@ -126,7 +126,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "static"), os.path.join(BASE_DIR, "files"),
 ]
 
 MEDIA_URL = '/media/'
@@ -137,10 +137,11 @@ DJANGO_TABLES2_TEMPLATE = 'django_tables2/bootstrap4.html'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # < here
 LOGIN_REDIRECT_URL = 'scanner:home'  # < here
 
-ACCOUNT_EMAIL_VERIFICATION = 'none'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+EMAIL_HOST_USER = 'Abdurrahamanabdullahi20@gmail.com'
+DEFAULT_FROM_EMAIL = 'Abdurrahamanabdullahi20@gmail.com'
+
 
 LOGIN_REDIRECT_URL = 'scanner:home'
 LOGOUT_REDIRECT_URL = 'scanner:home'
