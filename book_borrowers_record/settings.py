@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-
+PASSWORD = 'abdull@gmail.com8035'
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -132,16 +132,15 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-DJANGO_TABLES2_TEMPLATE = 'django_tables2/bootstrap4.html'
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # < here
-LOGIN_REDIRECT_URL = 'scanner:home'  # < here
-
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # < here
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
 EMAIL_HOST_USER = 'Abdurrahamanabdullahi20@gmail.com'
+EMAIL_HOST_PASSWORD = PASSWORD
 DEFAULT_FROM_EMAIL = 'Abdurrahamanabdullahi20@gmail.com'
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = 'scanner:home'
 LOGOUT_REDIRECT_URL = 'scanner:home'

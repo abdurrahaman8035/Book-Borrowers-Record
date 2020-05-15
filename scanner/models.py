@@ -31,7 +31,7 @@ class Student(models.Model):
         verbose_name_plural = 'students'
 
     image = models.ImageField(
-        upload_to='images//%Y/%m/%d/', null=True)
+        upload_to='images//%Y/%m/%d/', blank=False, null=True)
     first_name = models.CharField(max_length=100)
     second_name = models.CharField(max_length=100)
     id_number = models.CharField(max_length=15, unique=True)
@@ -45,13 +45,9 @@ class Student(models.Model):
         max_length=5,
         choices=CHOICES,
     )
-    email_sent = models.BooleanField(null=True, blank=True, default=None)
+    email_sent = models.BooleanField(null=True, blank=True, default=False)
+    sms_sent = models.BooleanField(null=True, blank=True, default=False)
 
-    def Notify(self):
-        Message = f'Dear {self.first_name} {self.second_name},\n Thanks for registering with the Library.\n Note: Attached below is our rules and regulations for you to read.\n Thanks!'
-        return Message
-        # send_mail(subject='Welcome to YSU Library', message=Message,
-        #           from_email='YSU-Library_Team@gmail.com')
 
     def get_absolute_url(self):
         return reverse('scanner:profile', kwargs={'student_id': self.pk})
@@ -70,13 +66,16 @@ class Staff(models.Model):
         ordering = ['-registration_date']
         verbose_name_plural = 'staffs'
     image = models.ImageField(
-        upload_to='images//%Y/%m/%d/', default='images/user-circle.svg')
+        upload_to='images//%Y/%m/%d/', blank=False)
     first_name = models.CharField(max_length=100)
     second_name = models.CharField(max_length=100)
     staff_id = models.CharField(max_length=15, unique=True)
     Email = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=11, unique=True)
     registration_date = models.DateTimeField(auto_now_add=True)
+    email_sent = models.BooleanField(null=True, blank=True, default=False)
+    sms_sent = models.BooleanField(null=True, blank=True, default=False)
+
 
     def get_absolute_url(self):
         return reverse('scanner:staffprofile', kwargs={'staff_id': self.pk})
@@ -137,7 +136,7 @@ def send_email_to_student(sender, **kwargs):
     student_name = str(student.first_name) + ' ' + str(student.second_name)
     student_email = student.Email
     message = 'Hello {}, thanks for registering with us! Attached is our rules and regulations for you to read! thanks'.format(student_name)
-    if student.email_sent is None:
+    if student.email_sent is False:
         email = EmailMessage('Welcome Email from YSU YSU-Library_Team',
                         message, [student_email])
         email.attach_file('static/files/rules_and_regulations.pdf')
@@ -147,6 +146,22 @@ def send_email_to_student(sender, **kwargs):
         print(message)
         student.save()
 
+
+@receiver(post_save, sender=Staff, dispatch_uid="send_email_to_staff")
+def send_email_to_staff(sender, **kwargs):
+    staff = kwargs['instance']
+    staff_name = str(staff.first_name) + ' ' + str(staff.second_name)
+    staff_email = staff.Email
+    message = 'Hello {}, thanks for registering with us! Attached is our rules and regulations for you to read! thanks'.format(staff_name)
+    if staff.email_sent is False:
+        email = EmailMessage('Welcome Email from YSU YSU-Library_Team',
+                        message, [staff_email])
+        email.attach_file('static/files/rules_and_regulations.pdf')
+        email.send(fail_silently=False)
+        staff.email_sent = True
+        print('sending email...')
+        print(message)
+        staff.save()
 
 
 # class Edit_Overdue_Charges(models.Model):

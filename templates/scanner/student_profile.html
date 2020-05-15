@@ -23,6 +23,7 @@
       <p>ID Number : {{ student.id_number | upper}}</p>
       <p>Level : {{ student.level }}</p>
       <p>Registered on : {{ student.registration_date }}</p>
+      <p>Email Sent: {{ student.email_sent }}</p>
       <!--            <a href="#" class="btn btn-success center">Edit Info</a>-->
       <a href="{% url 'scanner:edit_student_profile' student.pk %}" class="btn btn-success btn-icon-split">
         <span class="icon text-white-50">
@@ -49,7 +50,7 @@
             <div class="card-body">
               <h5 class="card-title" style="color: white;">{{ book.rem_days }}</h5>
               <ul style="text-align: left;" class="list-group list-group-flush">
-                <li class="list-group-item">Title : {{ book.title }}</li>
+                <li class="list-group-item">Title : {{ book.title | title}}</li>
                 <li class="list-group-item">Author : </li>
                 <li class="list-group-item">Publisher : </li>
                 <li class="list-group-item">ISBN : 9887676545432</li>

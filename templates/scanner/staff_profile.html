@@ -22,6 +22,7 @@
       <p>Phone Number : {{ staff.phone_number }}</p>
       <p>Staff ID : {{ staff.staff_id | upper}}</p>
       <p>Registered on : {{ staff.registration_date }}</p>
+      <p>Email Sent : {{ staff.email_sent }}</p>
       <!--            <a href="#" class="btn btn-success center">Edit Info</a>-->
       <a href="{% url 'scanner:edit_staff_profile' staff.pk %}" class="btn btn-success btn-icon-split">
         <span class="icon text-white-50">
@@ -47,7 +48,7 @@
             <div class="card-body">
               <h5 class="card-title" style="color: white;">{{ book.rem_days }}</h5>
               <ul style="text-align: left;" class="list-group list-group-flush">
-                <li class="list-group-item">Title : {{ book.title }}</li>
+                <li class="list-group-item">Title : {{ book.title | title }}</li>
                 <li class="list-group-item">Author : </li>
                 <li class="list-group-item">Publisher : </li>
                 <li class="list-group-item">ISBN : 9887676545432</li>

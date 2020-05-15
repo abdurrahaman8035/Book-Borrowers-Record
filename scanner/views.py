@@ -219,14 +219,14 @@ class Register_staff(LoginRequiredMixin, CreateView):
 class StudentEditProfile(UpdateView):
     model = Student
     template_name = 'scanner\\edit_student_profile.html'
-    fields = '__all__'
+    fields = ['image', 'first_name', 'second_name', 'id_number', 'Email', 'phone_number', 'year_of_admission', 'level']
     context_object_name = 'student'
 
 
 class StaffEditProfile(UpdateView):
     model = Staff
     template_name = 'scanner\\edit_staff_profile.html'
-    fields = '__all__'
+    fields = ['image', 'first_name', 'second_name', 'staff_id', 'Email', 'phone_number']
     context_object_name = 'staff'
 
 
